@@ -1,6 +1,4 @@
 // ignore: file_names
-import 'package:flutter/foundation.dart';
-
 class CharactersRequestDTO {
   final List<CharacterDTO> items;
   final MetaDTO meta;
