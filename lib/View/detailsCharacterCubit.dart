@@ -2,25 +2,27 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:new_study/Models/DTO/CharactersRequest.dart';
+import 'package:new_study/Models/DTO/characterDetailsDTO.dart';
 import '../Models/dataState.dart';
 import '../Models/Service/Service.dart';
 
-class CharacterListCubit extends Cubit<DataState> {
-  static const valueKey = ValueKey("characterListCubit");
+class DetailsCharacterCubit extends Cubit<DataState> {
+  static const valueKey = ValueKey("DetailsCharacterCubit");
   final DragonBallAPI service;
+  final int characterId;
 
-  CharacterListCubit({required this.service}) : super(InicialState()) {
-    _getDragonBallCharacters();
+  DetailsCharacterCubit({required this.service, required this.characterId}) : super(InicialState()) {
+    _getDragonBallCharacterDetails(characterId);
   }
 
-  void _getDragonBallCharacters() async {
+  void _getDragonBallCharacterDetails(int id) async {
     emit(LoadingState());
 
     await Future.delayed(
       const Duration(seconds: 2),
     );
 
-    final result = await service.fetchCharacters();
+    final result = await service.fetchCharacterDetails(id);
 
     if (result.statusCode == 400) {
       emit(Error(descriptionError: "BadRequest"));
@@ -32,7 +34,7 @@ class CharacterListCubit extends Cubit<DataState> {
 
     Map<String, dynamic> decoded = jsonDecode(result.body);
 
-    final data = CharactersRequestDTO.fromJson(decoded);
+    final data = CharacterDetailsDTO.jsonFrom(decoded);
     emit(SucessedState(data: data));
   }
 }

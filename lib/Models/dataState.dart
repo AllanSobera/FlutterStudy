@@ -1,4 +1,3 @@
-
 import 'package:new_study/Models/DTO/CharactersRequest.dart';
 
 abstract class DataState {}
@@ -9,10 +8,12 @@ class LoadingState extends DataState {}
 
 class SucessedState extends DataState {
   SucessedState({required this.data});
-  final CharactersRequestDTO data;
+  final GenericData data;
 }
 
 class Error extends DataState {
   Error({required this.descriptionError});
   final String descriptionError;
 }
+
+abstract class GenericData {}
