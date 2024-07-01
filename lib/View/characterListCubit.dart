@@ -31,7 +31,7 @@ class CharacterListCubit extends Cubit<DataState> {
     }
 
     Map<String, dynamic> decoded = jsonDecode(result.body);
-
+    
     final data = CharactersRequestDTO.fromJson(decoded);
     emit(SucessedState(data: data));
   }

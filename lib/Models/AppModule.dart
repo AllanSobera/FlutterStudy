@@ -11,8 +11,7 @@ class AppModule extends Module {
   @override
   void binds(Injector i) {
     i.addSingleton(DragonBallAPI.new);
-    i.addSingleton(CharacterListCubit.new,
-        key: CharacterListCubit.valueKey.value);
+    i.addSingleton(CharacterListCubit.new);
     i.addSingleton(
       DetailsCharacterCubit.new,
       key: DetailsCharacterCubit.valueKey.value,
@@ -26,7 +25,7 @@ class AppModule extends Module {
       child: (_) => const StartScreen(),
     );
     r.child(
-      "${DetailsScreen.screenRoute}/${DetailsScreen.parameters}",
+      DetailsScreen.screenRoute,
       child: (_) => DetailsScreen(
         id: r.args.params['id'],
       ),

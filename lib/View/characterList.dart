@@ -24,7 +24,7 @@ class CharactersList extends StatelessWidget {
               child: CharacterCell(
                 character: characters[index],
                 cellDidTap: (id) {
-                  Modular.to.pushNamed("${DetailsScreen.screenRoute}/$id");
+                  // Modular.to.pushNamed(DetailsScreen.screenRoute, arguments: id);
                 },
               ),
             );

@@ -14,7 +14,7 @@ class CharactersRequestDTO extends GenericData {
 
   factory CharactersRequestDTO.fromJson(Map<String, dynamic> json) {
     var items = json['items'] as List;
-    var itemsDto = items.map((e) => CharacterDTO.jsonFrom(e));
+    var itemsDto = items.map((e) => CharacterDTO.fromJson(e));
     return CharactersRequestDTO(
       items: itemsDto.toList(),
       meta: MetaDTO.fromJson(json['meta']),
@@ -93,7 +93,7 @@ class CharacterDTO {
       required this.affiliation,
       this.deletedAt});
 
-  factory CharacterDTO.jsonFrom(Map<String, dynamic> json) {
+  factory CharacterDTO.fromJson(Map<String, dynamic> json) {
     return CharacterDTO(
         id: json['id'],
         name: json['name'],

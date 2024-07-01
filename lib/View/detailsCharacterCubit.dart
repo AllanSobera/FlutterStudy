@@ -9,13 +9,10 @@ import '../Models/Service/Service.dart';
 class DetailsCharacterCubit extends Cubit<DataState> {
   static const valueKey = ValueKey("DetailsCharacterCubit");
   final DragonBallAPI service;
-  final int characterId;
 
-  DetailsCharacterCubit({required this.service, required this.characterId}) : super(InicialState()) {
-    _getDragonBallCharacterDetails(characterId);
-  }
+  DetailsCharacterCubit({required this.service,}) : super(InicialState()) {}
 
-  void _getDragonBallCharacterDetails(int id) async {
+  void getDragonBallCharacterDetails(int id) async {
     emit(LoadingState());
 
     await Future.delayed(

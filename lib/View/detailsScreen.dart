@@ -5,13 +5,26 @@ import 'package:new_study/Models/dataState.dart';
 import 'package:new_study/View/detailsCharacterCubit.dart';
 
 
-class DetailsScreen extends StatelessWidget {
+class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key, required this.id});
 
   static const screenRoute = "/DetailsScreen";
-  static const parameters = ":id";
 
   final int id;
+
+  @override
+  State<DetailsScreen> createState() => _DetailsScreenState();
+}
+
+class _DetailsScreenState extends State<DetailsScreen> {
+
+  final cubit = Modular.get<DetailsCharacterCubit>();
+
+  @override
+  void initState() {
+    super.initState();
+    cubit.getDragonBallCharacterDetails(widget.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +44,9 @@ class DetailsScreen extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (context) => Modular.get<DetailsCharacterCubit>;
+        create: (context) => Modular.get<DetailsCharacterCubit>(
+          key: DetailsCharacterCubit.valueKey.value
+        ),
         child: BlocBuilder<DetailsCharacterCubit, DataState>(
           builder: (context, state) {
               return const Center(

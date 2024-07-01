@@ -30,8 +30,7 @@ class StartScreen extends StatelessWidget {
         ),
       ),
       body: BlocProvider(
-        create: (context) => Modular.get<CharacterListCubit>(
-            key: CharacterListCubit.valueKey.value),
+        create: (context) => Modular.get<CharacterListCubit>(),
         child: BlocBuilder<CharacterListCubit, DataState>(
           builder: (context, state) {
             if (state is InicialState) {
